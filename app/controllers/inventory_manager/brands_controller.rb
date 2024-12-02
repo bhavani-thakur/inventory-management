@@ -8,6 +8,8 @@ module InventoryManager
     def show
       brand = Brand.find(params[:id])
       render json: BrandSerializer.new(brand)
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Brand not found' }, status: :not_found
     end
 
     def create
@@ -17,6 +19,17 @@ module InventoryManager
       else
         render json: { errors: brand.errors.full_messages }, status: :unprocessable_entity
       end
+    end
+
+    def update
+      brand = Brand.find(params[:id])
+      if brand.update(brand_params)
+        render json: BrandSerializer.new(brand)
+      else
+        render json: { errors: brand.errors.full_messages }, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Brand not found' }, status: :not_found
     end
 
     private
