@@ -1,5 +1,7 @@
 module InventoryManager
   class ProductsController < ApplicationController
+    before_action :set_product, only: [:show, :update]
+
     def index
       products = Product.all
       render json: ProductSerializer.new(products)
@@ -15,27 +17,25 @@ module InventoryManager
     end
 
     def show
-      product = Product.find(params[:id])
-      render json: ProductSerializer.new(product)
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Product Not Found' }, status: :not_found
+      render json: ProductSerializer.new(@product)
     end
 
     def update
-      product = Product.find(params[:id])
-      if product.update(products_params)
-        render json: ProductSerializer.new(product)
+      if @product.update(products_params)
+        render json: ProductSerializer.new(@product)
       else
-        render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
       end
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Product Not Found' }, status: :not_found
     end
 
     private
 
+    def set_product
+      @product = Product.find(params[:id])
+    end
+
     def products_params
-      params.require(:product).permit(:name, :brand_id, :description)
+      params.require(:product).permit(:name, :brand_id, :description, :category_id)
     end
   end
 end

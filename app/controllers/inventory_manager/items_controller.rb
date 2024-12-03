@@ -1,5 +1,7 @@
 module InventoryManager
   class ItemsController < ApplicationController
+    before_action :set_item, only: [:show, :update]
+
     def index
       items = Item.all
       render json: ItemSerializer.new(items).serializable_hash
@@ -15,27 +17,25 @@ module InventoryManager
     end
 
     def show
-      item = item.find(params[:id])
-      render json: ItemSerializer.new(item)
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Items not found' }, status: :not_found
+      render json: ItemSerializer.new(@item)
     end
 
     def update
-      item = item.find(params[:id])
-      if item.update(item_params)
-        render json: ItemSerializer.new(item)
+      if @item.update(item_params)
+        render json: ItemSerializer.new(@item)
       else
-        render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
       end
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Items not found' }, status: :not_found
     end
 
     private
 
+    def set_item
+      @item = Item.find(params[:id])
+    end
+
     def item_params
-      params.require(:item).permit(:name, :brand_id, :product_id, :price, :in_stock, :minimum_required_stock, :quantity)
+      params.require(:item).permit(:name, :brand_id, :product_id, :price, :minimum_required_stock, :quantity)
     end
   end
 end

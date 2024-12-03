@@ -1,6 +1,6 @@
 module InventoryManager
   class Product < ApplicationRecord
-    self.table_name = "produts"
+    self.table_name = "products"
 
     validates :name, presence: true
     

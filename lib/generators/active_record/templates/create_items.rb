@@ -3,11 +3,9 @@ class CreateItems < ActiveRecord::Migration<%= migration_version %>
     create_table :items do |t|
       t.string :name, null: false
       t.integer :product_id, null: false
-      t.decimal :price, precision: 10, scale: 2, null: false
-      t.integer :in_stock, default: 0
+      t.float :price
       t.integer :minimum_required_stock, default: 0
-      t.integer :procurement_time_in_weeks, default: 0
-      t.string :quantity
+      t.integer :quantity
       t.timestamps
     end
     add_foreign_key :items, :products, column: :product_id
