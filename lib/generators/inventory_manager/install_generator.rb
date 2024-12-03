@@ -15,7 +15,7 @@ module InventoryManager
     #   say_status("info", "Running controller generators...", :blue)
       
     #   # List of controllers to generate
-    #   controllers = %w[brands categories brand_categories items]
+    #   controllers = %w[brands categories products items]
 
     #   controllers.each do |controller|
     #     generate "controller", "inventory_manager/#{controller} --skip-routes --no-helper --no-assets"
@@ -25,7 +25,7 @@ module InventoryManager
     # def run_model_generators
     #   say_status("info", "Running model generators...", :blue)
     #   # List of controllers to generate
-    #   modules = %w[brands categories brand_categories items]
+    #   modules = %w[brands categories products items]
 
     #   modules.each do |controller|
     #     generate "model", "inventory_manager/#{controller} --skip-routes --no-helper --no-assets"

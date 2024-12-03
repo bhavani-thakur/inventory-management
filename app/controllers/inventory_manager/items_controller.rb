@@ -35,7 +35,7 @@ module InventoryManager
     private
 
     def item_params
-      params.require(:item).permit(:name, :brand_id, :brand_category_id, :price, :in_stock, :minimum_required_stock, :quantity)
+      params.require(:item).permit(:name, :brand_id, :product_id, :price, :in_stock, :minimum_required_stock, :quantity)
     end
   end
 end

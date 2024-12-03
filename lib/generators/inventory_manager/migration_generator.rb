@@ -25,7 +25,7 @@ module InventoryManager
     def inventories_migration
       migration_template "create_brands.rb", "db/migrate/create_brands.rb", migration_version: migration_version
       migration_template "create_categories.rb", "db/migrate/create_categories.rb", migration_version: migration_version
-      migration_template "create_brand_categories.rb", "db/migrate/create_brand_categories.rb", migration_version: migration_version
+      migration_template "create_products.rb", "db/migrate/create_products.rb", migration_version: migration_version
       migration_template "create_items.rb", "db/migrate/create_items.rb", migration_version: migration_version
     end
   end

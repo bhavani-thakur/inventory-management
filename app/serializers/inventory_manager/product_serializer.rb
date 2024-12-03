@@ -1,5 +1,5 @@
 module InventoryManager
-  class BrandCategorySerializer
+  class ProductSerializer
     include FastJsonapi::ObjectSerializer
 
     attributes :id, :name, :description

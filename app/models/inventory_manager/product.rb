@@ -1,6 +1,6 @@
 module InventoryManager
-  class BrandCategory < ApplicationRecord
-    self.table_name = "brand_categories"
+  class Product < ApplicationRecord
+    self.table_name = "produts"
 
     validates :name, presence: true
     
